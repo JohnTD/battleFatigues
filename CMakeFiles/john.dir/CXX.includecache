@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/edwardwong/john/john.cpp
+vector
+-
+kmeans.h
+/home/edwardwong/john/kmeans.h
+
+/home/edwardwong/john/kmeans.h
+iostream
+-
+vector
+-
+algorithm
+-
+math.h
+-
+time.h
+-
+
