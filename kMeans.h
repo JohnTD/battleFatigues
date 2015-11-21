@@ -7,33 +7,30 @@ using namespace std;
 
 #define minValue -0xffffffff 
 #define maxValue 0xffffffff 
-
 #define vecPixel vector<Pixel*>
 
-struct Pixel
+
+class Pixel
 {
-    double B;
-    double G;
-    double R;
-    double SSE;
+    public:
+        Pixel(): B(0), G(0), R(0), totalSSE(0) {}
+
+        double B;
+        double G;
+        double R;
+        double totalSSE;
 };
 
-inline void imageInit(int image[], int len, int val)
-{
-    for(int i = 0; i < len; ++i)
-        image[i] = val;
-}
 
-inline void pixelInit(Pixel* pixel, int len)
+class subPixel_
 {
-    for(int i = 0; i < len; ++i)
-    {
-        pixel[i].B = 0;
-        pixel[i].G = 0;
-        pixel[i].R = 0;
-        pixel[i].SSE = 0;
-    }
-}
+    public:
+        subPixel_(): index(-1), SSE(0) {}
+
+        int index;
+        double SSE;
+};
+
 
 inline Pixel* imageMin(vecPixel* image)
 {
@@ -56,10 +53,10 @@ inline Pixel* imageMin(vecPixel* image)
     pixel->B = minB;
     pixel->G = minG;
     pixel->R = minR;
-    pixel->SSE = 0;
 
     return pixel;
 }
+
 
 inline Pixel* imageMax(vecPixel* image)
 {
@@ -82,44 +79,42 @@ inline Pixel* imageMax(vecPixel* image)
     pixel->B = maxB;
     pixel->G = maxG;
     pixel->R = maxR;
-    pixel->SSE = 0;
 
     return pixel;
 }
+
+
+Pixel* randCent(vecPixel* image, int k)
+{
+    Pixel* centroids = new Pixel[k];
+
+    Pixel* minPixel = imageMin(image);
+    Pixel* maxPixel = imageMax(image);
+
+    srand((unsigned)time(0));
+
+    for(int i = 0; i < k; ++i)
+    {
+        centroids[i].B = minPixel->B + (maxPixel->B - minPixel->B) * (rand() / (double)(RAND_MAX));
+        centroids[i].G = minPixel->G + (maxPixel->G - minPixel->G) * (rand() / (double)(RAND_MAX));
+        centroids[i].R = minPixel->R + (maxPixel->R - minPixel->R) * (rand() / (double)(RAND_MAX));
+    }
+
+    return centroids;
+}
+
 
 inline double distance(Pixel& pixel, Pixel* image)
 {
     return sqrt(pow(pixel.B - image->B, 2) + pow(pixel.G - image->G, 2) + pow(pixel.R - image->R, 2));
 }
 
-Pixel* randCent(vecPixel* image, int k)
+
+Pixel* kmeans(vecPixel* image, int k)
 {
-    Pixel* centroids = new Pixel[k];
-
-    Pixel* minN = imageMin(image);
-    Pixel* maxN = imageMax(image);
-
-    srand((unsigned)time(0));
-
-    for(int i = 0; i < k; ++i)
-    {
-        centroids[i].x = minN->x + (maxN->x - minN->x) * (rand() / (double)(RAND_MAX));
-        centroids[i].y = minN->y + (maxN->y - minN->y) * (rand() / (double)(RAND_MAX));
-    }
-
-    return centroids;
-}
-
-void kmeans(vecPixel* image, int k)
-{
-    const int len = image->size();
-
-    Pixel* centroids = new Pixel[k];
-    centroids = randCent(image, k);
-
-    Pixel* clusterAss = new Pixel[len];
-    pixelInit(clusterAss, len);
-
+    const int len       = image->size();
+    Pixel* centroids    = randCent(image, k);
+    subPixel_* subPixel = new subPixel_[len];
     bool clusterChanged = true;
 
     while(clusterChanged)
@@ -128,12 +123,12 @@ void kmeans(vecPixel* image, int k)
 
         for(int i = 0; i < len; ++i)
         {
-            int index = -1;
+            int index   = -1;
             double dist = maxValue;
 
-            for(int index_ = 0; j < k; ++j)
+            for(int index_ = 0; index_ < k; ++index_)
             {
-                double dist_ = distance(centroids[j], image->at(i));
+                double dist_ = distance(centroids[index_], image->at(i));
                 if(dist_ < dist)   
                 {
                     dist = dist_;
@@ -141,47 +136,35 @@ void kmeans(vecPixel* image, int k)
                 }
             }
 
-            if(clusterAss[i].x != index)
+            if(subPixel[i].index != index)
                 clusterChanged = true;
 
-            clusterAss[i].x = index;
-            clusterAss[i].y = dist;
+            subPixel[i].index = index;
+            subPixel[i].SSE   = dist;
         }
     }
 
-    pixelInit(centroids, k);
-
     int* cnt = new int[k];
-    imageInit(cnt, k, -1);
+    for(int i = 0; i < k; ++i)
+        cnt[i] = 0;
 
     for(int i = 0; i < len; ++i)
     {
-        centroids[index[i]].x += image->at(i)->x;
-        centroids[index[i]].y += image->at(i)->y;
-        cnt[index[i]] += 1;
+        cnt[subPixel[i].index]                += 1;
+        centroids[subPixel[i].index].B        += image->at(i)->B;
+        centroids[subPixel[i].index].G        += image->at(i)->G;
+        centroids[subPixel[i].index].R        += image->at(i)->R;
+        centroids[subPixel[i].index].totalSSE += subPixel[i].SSE;
     }
 
     for(int i = 0; i < k; ++i)
     {
-        if(centroids[i].cnt != 0)
-        {
-            centroids[i].x = centroids[i].x / cnt[i];
-            centroids[i].y = centroids[i].y / cnt[i];
-            cout<< "--- 第 " << i+1 << " 类 ---" <<endl
-                << centroids[i].x << " " << centroids[i].y << endl;
-        }
-        else cout<< "第 " << i+1 << " 类总数为0" <<endl;
+        centroids[i].B /= cnt[i];
+        centroids[i].G /= cnt[i];
+        centroids[i].R /= cnt[i];
     }
-    
-    delete[] centroids;
-    delete[] index;
-}
 
-void insertPixel(vecPixel* image, double x, double y)
-{
-    Pixel* pixel = new Pixel;
-    pixel->x = x;
-    pixel->y = y;
-    image->push_back(pixel);
-}
+    delete[] cnt;
 
+    return centroids;
+}

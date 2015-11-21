@@ -1,16 +1,31 @@
-#include <iostream>
-#include <stdio.h>
+#include <opencv2/core.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
 #include <vector>
 #include "kMeans.h"
 
+using namespace cv;
+
+
 int main(int argc, char** argv)
 {
-    freopen("./testSet.txt", "r", stdin);
-    vecNode* arr = new vecNode;
-    double x, y;
-    while(cin>>x>>y)
-        insertNode(arr, x, y);
+    vecPixel* image = new vecPixel;
+
+    Mat img = imread(argv[1], IMREAD_COLOR);
     
-    kmeans(arr, 4);
-    delete[] arr;
+    int nr = img.rows;
+    int nc = img.cols;
+
+    for(int i = 0; i < nr; ++i)
+    {
+        for(int j = 0; j < nc; ++j)
+        {
+            Pixel* pixel = new Pixel;
+            pixel->B = (double)img.at<Vec3b>(i, j)[0];
+            pixel->G = (double)img.at<Vec3b>(i, j)[1];
+            pixel->R = (double)img.at<Vec3b>(i, j)[2];
+            image->push_back(pixel);
+        }
+    }
+
 }

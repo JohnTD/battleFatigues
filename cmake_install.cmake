@@ -1,4 +1,4 @@
-# Install script for directory: /home/worldwidehua/battle-fatigues
+# Install script for directory: /home/edwardwong/battle-fatigues
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,7 +38,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/worldwidehua/battle-fatigues/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/home/edwardwong/battle-fatigues/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/worldwidehua/battle-fatigues/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/home/edwardwong/battle-fatigues/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

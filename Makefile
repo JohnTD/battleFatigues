@@ -42,10 +42,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/worldwidehua/battle-fatigues
+CMAKE_SOURCE_DIR = /home/edwardwong/battle-fatigues
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/worldwidehua/battle-fatigues
+CMAKE_BINARY_DIR = /home/edwardwong/battle-fatigues
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,9 +72,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles /home/worldwidehua/battle-fatigues/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/battle-fatigues/CMakeFiles /home/edwardwong/battle-fatigues/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/battle-fatigues/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
