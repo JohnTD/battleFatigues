@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(john)
+project(battle-fatigues)
 
 set(CMAKE_VERBOSE_MAKEFILE on)
 set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
@@ -14,5 +14,5 @@ include_directories(${PROJECT_SRC_DIR}/include, ${OpenCV_INCLUDE_DIRS})
 link_directories(${PROJECT_SRC_DIR}/lib)
 
 aux_source_directory(. SRC_LIST)
-add_executable(john ${SRC_LIST})
-target_link_libraries(john ${OpenCV_LIBS})
+add_executable(battle-fatigues ${SRC_LIST})
+target_link_libraries(battle-fatigues ${OpenCV_LIBS})

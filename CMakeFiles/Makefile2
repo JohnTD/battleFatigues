@@ -50,44 +50,44 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/edwardwong/john
+CMAKE_SOURCE_DIR = /home/worldwidehua/battle-fatigues
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/edwardwong/john
+CMAKE_BINARY_DIR = /home/worldwidehua/battle-fatigues
 
 #=============================================================================
-# Target rules for target CMakeFiles/john.dir
+# Target rules for target CMakeFiles/battle-fatigues.dir
 
 # All Build rule for target.
-CMakeFiles/john.dir/all:
-	$(MAKE) -f CMakeFiles/john.dir/build.make CMakeFiles/john.dir/depend
-	$(MAKE) -f CMakeFiles/john.dir/build.make CMakeFiles/john.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/edwardwong/john/CMakeFiles  1
-	@echo "Built target john"
-.PHONY : CMakeFiles/john.dir/all
+CMakeFiles/battle-fatigues.dir/all:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/depend
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/worldwidehua/battle-fatigues/CMakeFiles  1
+	@echo "Built target battle-fatigues"
+.PHONY : CMakeFiles/battle-fatigues.dir/all
 
 # Include target in all.
-all: CMakeFiles/john.dir/all
+all: CMakeFiles/battle-fatigues.dir/all
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/john.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/john/CMakeFiles 1
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/john.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/john/CMakeFiles 0
-.PHONY : CMakeFiles/john.dir/rule
+CMakeFiles/battle-fatigues.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/battle-fatigues.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles 0
+.PHONY : CMakeFiles/battle-fatigues.dir/rule
 
 # Convenience name for target.
-john: CMakeFiles/john.dir/rule
-.PHONY : john
+battle-fatigues: CMakeFiles/battle-fatigues.dir/rule
+.PHONY : battle-fatigues
 
 # clean rule for target.
-CMakeFiles/john.dir/clean:
-	$(MAKE) -f CMakeFiles/john.dir/build.make CMakeFiles/john.dir/clean
-.PHONY : CMakeFiles/john.dir/clean
+CMakeFiles/battle-fatigues.dir/clean:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/clean
+.PHONY : CMakeFiles/battle-fatigues.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/john.dir/clean
+clean: CMakeFiles/battle-fatigues.dir/clean
 .PHONY : clean
 
 #=============================================================================

@@ -42,10 +42,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/edwardwong/john
+CMAKE_SOURCE_DIR = /home/worldwidehua/battle-fatigues
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/edwardwong/john
+CMAKE_BINARY_DIR = /home/worldwidehua/battle-fatigues
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,9 +72,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/john/CMakeFiles /home/edwardwong/john/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles /home/worldwidehua/battle-fatigues/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/john/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -102,41 +102,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named john
+# Target rules for targets named battle-fatigues
 
 # Build rule for target.
-john: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 john
-.PHONY : john
+battle-fatigues: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 battle-fatigues
+.PHONY : battle-fatigues
 
 # fast build rule for target.
-john/fast:
-	$(MAKE) -f CMakeFiles/john.dir/build.make CMakeFiles/john.dir/build
-.PHONY : john/fast
+battle-fatigues/fast:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/build
+.PHONY : battle-fatigues/fast
 
-john.o: john.cpp.o
-.PHONY : john.o
+battle-fatigues.o: battle-fatigues.cpp.o
+.PHONY : battle-fatigues.o
 
 # target to build an object file
-john.cpp.o:
-	$(MAKE) -f CMakeFiles/john.dir/build.make CMakeFiles/john.dir/john.cpp.o
-.PHONY : john.cpp.o
+battle-fatigues.cpp.o:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.o
+.PHONY : battle-fatigues.cpp.o
 
-john.i: john.cpp.i
-.PHONY : john.i
+battle-fatigues.i: battle-fatigues.cpp.i
+.PHONY : battle-fatigues.i
 
 # target to preprocess a source file
-john.cpp.i:
-	$(MAKE) -f CMakeFiles/john.dir/build.make CMakeFiles/john.dir/john.cpp.i
-.PHONY : john.cpp.i
+battle-fatigues.cpp.i:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.i
+.PHONY : battle-fatigues.cpp.i
 
-john.s: john.cpp.s
-.PHONY : john.s
+battle-fatigues.s: battle-fatigues.cpp.s
+.PHONY : battle-fatigues.s
 
 # target to generate assembly for a file
-john.cpp.s:
-	$(MAKE) -f CMakeFiles/john.dir/build.make CMakeFiles/john.dir/john.cpp.s
-.PHONY : john.cpp.s
+battle-fatigues.cpp.s:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.s
+.PHONY : battle-fatigues.cpp.s
 
 # Help Target
 help:
@@ -144,12 +144,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... battle-fatigues"
 	@echo "... edit_cache"
-	@echo "... john"
 	@echo "... rebuild_cache"
-	@echo "... john.o"
-	@echo "... john.i"
-	@echo "... john.s"
+	@echo "... battle-fatigues.o"
+	@echo "... battle-fatigues.i"
+	@echo "... battle-fatigues.s"
 .PHONY : help
 
 

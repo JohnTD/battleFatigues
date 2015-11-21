@@ -6,13 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/edwardwong/john/john.cpp
+/home/worldwidehua/battle-fatigues/battle-fatigues.cpp
+iostream
+-
+stdio.h
+-
 vector
 -
-kmeans.h
-/home/edwardwong/john/kmeans.h
+kMeans.h
+/home/worldwidehua/battle-fatigues/kMeans.h
 
-/home/edwardwong/john/kmeans.h
+/home/worldwidehua/battle-fatigues/kMeans.h
 iostream
 -
 vector
