@@ -13,22 +13,26 @@ using namespace std;
 class Pixel
 {
     public:
-        Pixel(): B(0), G(0), R(0), totalSSE(0) {}
+        Pixel(): B(0), G(0), R(0) {}
 
-        double B;
-        double G;
-        double R;
-        double totalSSE;
+        double B;      //B通道
+        double G;      //G通道
+        double R;      //R通道
 };
 
-
-class subPixel_
+class kMeansRes_
 {
     public:
-        subPixel_(): index(-1), SSE(0) {}
+        kMeansRes_(int centCnt, int pixelCnt)
+        {
+            centroids = new Pixel[centCnt];
+            index     = new int[pixelCnt];
+            SSE       = new double[pixelCnt];
+        }
 
-        int index;
-        double SSE;
+        Pixel* centroids;      //主色
+        int* index;            //归类
+        double* SSE;           //主色距离
 };
 
 
@@ -84,9 +88,9 @@ inline Pixel* imageMax(vecPixel* image)
 }
 
 
-Pixel* randCent(vecPixel* image, int k)
+void randCent(vecPixel* image, Pixel* centroids, int k)
 {
-    Pixel* centroids = new Pixel[k];
+    if(image == NULL || centroids == NULL || k <= 0) return;
 
     Pixel* minPixel = imageMin(image);
     Pixel* maxPixel = imageMax(image);
@@ -99,8 +103,6 @@ Pixel* randCent(vecPixel* image, int k)
         centroids[i].G = minPixel->G + (maxPixel->G - minPixel->G) * (rand() / (double)(RAND_MAX));
         centroids[i].R = minPixel->R + (maxPixel->R - minPixel->R) * (rand() / (double)(RAND_MAX));
     }
-
-    return centroids;
 }
 
 
@@ -110,11 +112,16 @@ inline double distance(Pixel& pixel, Pixel* image)
 }
 
 
-Pixel* kmeans(vecPixel* image, int k)
+kMeansRes_* kmeans(vecPixel* image, int k)
 {
     const int len       = image->size();
-    Pixel* centroids    = randCent(image, k);
-    subPixel_* subPixel = new subPixel_[len];
+
+    Pixel* centroids = new Pixel[k];
+    int* index       = new int[len];
+    double* SSE      = new double[len];
+
+    randCent(image, centroids, k);
+
     bool clusterChanged = true;
 
     while(clusterChanged)
@@ -123,38 +130,37 @@ Pixel* kmeans(vecPixel* image, int k)
 
         for(int i = 0; i < len; ++i)
         {
-            int index   = -1;
-            double dist = maxValue;
+            int index_     = -1;
+            double minDist = maxValue;
 
-            for(int index_ = 0; index_ < k; ++index_)
+            for(int j = 0; j < k; ++j)
             {
-                double dist_ = distance(centroids[index_], image->at(i));
-                if(dist_ < dist)   
+                double dist = distance(centroids[j], image->at(i));
+                if(dist < minDist)   
                 {
-                    dist = dist_;
-                    index = index_;
+                    minDist  = dist;
+                    index_ = j;
                 }
             }
 
-            if(subPixel[i].index != index)
+            if(index[i] != index_)
                 clusterChanged = true;
 
-            subPixel[i].index = index;
-            subPixel[i].SSE   = dist;
+            index[i] = index_;
+            SSE[i]   = minDist;
         }
     }
 
-    int* cnt = new int[k];
-    for(int i = 0; i < k; ++i)
+    int* cnt = new int[len];
+    for(int i = 0; i < len; ++i)
         cnt[i] = 0;
 
     for(int i = 0; i < len; ++i)
     {
-        cnt[subPixel[i].index]                += 1;
-        centroids[subPixel[i].index].B        += image->at(i)->B;
-        centroids[subPixel[i].index].G        += image->at(i)->G;
-        centroids[subPixel[i].index].R        += image->at(i)->R;
-        centroids[subPixel[i].index].totalSSE += subPixel[i].SSE;
+        cnt[index[i]]++;
+        centroids[index[i]].B += image->at(i)->B;
+        centroids[index[i]].G += image->at(i)->G;
+        centroids[index[i]].R += image->at(i)->R;
     }
 
     for(int i = 0; i < k; ++i)
@@ -166,5 +172,15 @@ Pixel* kmeans(vecPixel* image, int k)
 
     delete[] cnt;
 
-    return centroids;
+    kMeansRes_* kMeansRes = new kMeansRes_(len, k);
+    kMeansRes->centroids  = centroids;
+    kMeansRes->index   = index;
+    kMeansRes->SSE   = SSE;
+
+    return kMeansRes;
+}
+
+Pixel* binaryKmeans(vecPixel* image, int k)
+{
+        
 }
