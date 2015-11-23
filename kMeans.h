@@ -121,17 +121,19 @@ kMeansRes_* kMeans(vecPixel* image, int k)
 {
     if(image->size() == 0 || k < 1) return NULL;
 
-    const int len       = image->size();
+    const int len = image->size();
 
     vecPixel* centroids = new vecPixel;
     vecInt* index       = new vecInt(len, -1);
     vecDouble* minDistSplit  = new vecDouble(len, 0);
 
+    //随机生成一个controid
     centroids->push_back(randCent(image));
 
+    //kmeans++算法取初始controid
     for(int i = 0; i < k-1; ++i)
     {
-        Pixel* nextCent = new Pixel;
+        Pixel*      nextCent = new Pixel;
         double maxDistToCent = minValue;
         for(int m = 0; m < len; ++m)
         {
@@ -148,6 +150,7 @@ kMeansRes_* kMeans(vecPixel* image, int k)
 
     bool clusterChanged = true;
 
+    //聚类过程
     while(clusterChanged)
     {
         clusterChanged = false;
@@ -167,10 +170,12 @@ kMeansRes_* kMeans(vecPixel* image, int k)
                 }
             }
 
+            //第i点的归类情况发生变化
             if(index->at(i) != index_)
                 clusterChanged = true;
 
-            index->at(i)   = index_;
+            //更新归类数组和主色距离数组
+            index->at(i)        = index_;
             minDistSplit->at(i) = minDist_;
         }
 
@@ -178,6 +183,7 @@ kMeansRes_* kMeans(vecPixel* image, int k)
         for(int i = 0; i < k; ++i)
             cnt[i] = 1;
 
+        //统计各类别点数
         for(int i = 0; i < len; ++i)
         {
             cnt[index->at(i)]++;
@@ -231,10 +237,10 @@ vecPixel* binaryKmeans(vecPixel* image, int k)
 
     while(centroids->size() < k)
     {
-        double minSSE = maxValue;
-        int bestCentToSplit = -1;
+        double         minSSE = maxValue;
+        int   bestCentToSplit = -1;
         vecPixel* bestNewCent = NULL;
-        vecInt* bestClustAss = NULL;
+        vecInt*  bestClustAss = NULL;
         for(int i = 0; i < centroids->size(); ++i)
         {
             vecPixel*      imageSplit = new vecPixel;
@@ -244,9 +250,9 @@ vecPixel* binaryKmeans(vecPixel* image, int k)
             for(int j = 0; j < len; ++j)
             {
                 Pixel* pixel = new Pixel;
-                pixel->B = image->at(j)->B;
-                pixel->G = image->at(j)->G;
-                pixel->R = image->at(j)->R;
+                pixel->B     = image->at(j)->B;
+                pixel->G     = image->at(j)->G;
+                pixel->R     = image->at(j)->R;
                 if(index->at(j) == i)
                     imageSplit->push_back(pixel);
                 else
@@ -263,9 +269,9 @@ vecPixel* binaryKmeans(vecPixel* image, int k)
                 if(sseSplit + sseNotSplit < minSSE)
                 {
                     bestCentToSplit = i;
-                    bestNewCent = kMeansRes->centroids;
-                    bestClustAss = kMeansRes->index;
-                    minSSE = sseSplit + sseNotSplit;
+                    bestNewCent     = kMeansRes->centroids;
+                    bestClustAss    = kMeansRes->index;
+                    minSSE          = sseSplit + sseNotSplit;
                 }
             }
         }
@@ -275,7 +281,7 @@ vecPixel* binaryKmeans(vecPixel* image, int k)
             for(int i = 0; i < bestClustAss->size(); ++i)
             {
                 if(bestClustAss->at(i) == 0)
-                    index->at(bestCentToSplit) = bestCentToSplit;
+                    index->at(bestCentToSplit)  = bestCentToSplit;
                 else index->at(bestCentToSplit) = centroids->size();
             }
             centroids->at(bestCentToSplit) = bestNewCent->at(0);
