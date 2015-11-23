@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/worldwidehua/battle-fatigues/battle-fatigues.cpp" "/home/worldwidehua/battle-fatigues/CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.o"
+  "/home/edwardwong/battle-fatigues/main.cpp" "/home/edwardwong/battle-fatigues/CMakeFiles/battle-fatigues.dir/main.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

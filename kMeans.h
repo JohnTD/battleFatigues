@@ -5,11 +5,14 @@
 #include <time.h>
 using namespace std;
 
-#define minValue -0xffffffff 
-#define maxValue 0xffffffff 
+#define maxValue 0x3f3f3f3f
+#define minValue -maxValue
+
 #define vecPixel vector<Pixel*>
 #define vecInt vector<int>
 #define vecDouble vector<double>
+
+#define max(a, b) ((a >= b) ? (a) : (b))
 
 
 class Pixel
@@ -22,17 +25,17 @@ class Pixel
         double R;      //R通道
 };
 
-class kMeansRes_
+struct kMeansRes_
 {
-    public:
-        vecPixel* centroids;      //主色
-        vecInt* index;            //归类
-        vecDouble*  minDistSplit;      //主色距离
+    vecPixel* centroids;           //主色
+    vecInt* index;                 //归类
+    double minDistSplit;           //主色距离
+    double silhouCoeff;            //轮廓系数
 };
 
 
 inline Pixel* imageMin(vecPixel* image)
-{
+{/*{{{*/
     Pixel* pixel = new Pixel;
 
     double minB = maxValue;
@@ -54,11 +57,11 @@ inline Pixel* imageMin(vecPixel* image)
     pixel->R = minR;
 
     return pixel;
-}
+}/*}}}*/
 
 
 inline Pixel* imageMax(vecPixel* image)
-{
+{/*{{{*/
     Pixel* pixel = new Pixel;
 
     double maxB = minValue;
@@ -80,11 +83,11 @@ inline Pixel* imageMax(vecPixel* image)
     pixel->R = maxR;
 
     return pixel;
-}
+}/*}}}*/
 
 
 Pixel* randCent(vecPixel* image)
-{
+{/*{{{*/
     if(image->size() <= 0) return NULL;
 
     Pixel* minPixel = imageMin(image);
@@ -93,11 +96,11 @@ Pixel* randCent(vecPixel* image)
     srand((unsigned)time(0));
 
     Pixel* pixel = new Pixel;
-    pixel->B = minPixel->B + (maxPixel->B - minPixel->B) * (rand() / (double)(RAND_MAX));
-    pixel->G = minPixel->G + (maxPixel->G - minPixel->G) * (rand() / (double)(RAND_MAX));
-    pixel->R = minPixel->R + (maxPixel->R - minPixel->R) * (rand() / (double)(RAND_MAX));
+    pixel->B     = minPixel->B + (maxPixel->B - minPixel->B) * (rand() / (double)(RAND_MAX));
+    pixel->G     = minPixel->G + (maxPixel->G - minPixel->G) * (rand() / (double)(RAND_MAX));
+    pixel->R     = minPixel->R + (maxPixel->R - minPixel->R) * (rand() / (double)(RAND_MAX));
     return pixel;
-}
+}/*}}}*/
 
 
 double distance(Pixel* pixel, Pixel* image)
@@ -106,15 +109,15 @@ double distance(Pixel* pixel, Pixel* image)
 }
 
 
-inline double sseSum(vecDouble* SSE)
-{
-    double sseSum_ = 0;
-    for(int i = 0; i < SSE->size(); ++i)
+inline double Sum(vecDouble* vec)
+{/*{{{*/
+    double Sum_ = 0;
+    for(int i = 0; i < vec->size(); ++i)
     {
-        sseSum_ += SSE->at(i);
+        Sum_ += vec->at(i);
     }
-    return sseSum_;
-}
+    return Sum_;
+}/*}}}*/
 
 
 kMeansRes_* kMeans(vecPixel* image, int k)
@@ -123,9 +126,10 @@ kMeansRes_* kMeans(vecPixel* image, int k)
 
     const int len = image->size();
 
-    vecPixel* centroids = new vecPixel;
-    vecInt* index       = new vecInt(len, -1);
-    vecDouble* minDistSplit  = new vecDouble(len, 0);
+    vecPixel* centroids     = new vecPixel;
+    vecInt* index           = new vecInt(len, -1);
+    vecDouble* minDistSplit = new vecDouble(len, 0);
+    vecDouble* silhouCoeff    = new vecDouble(len, 0);
 
     //随机生成一个controid
     centroids->push_back(randCent(image));
@@ -155,18 +159,20 @@ kMeansRes_* kMeans(vecPixel* image, int k)
     {
         clusterChanged = false;
 
+        //遍历image
         for(int i = 0; i < len; ++i)
         {
             int index_      = -1;
             double minDist_ = maxValue;
 
+            //比较第i点和各centroid距离选择最合适centroid
             for(int j = 0; j < k; ++j)
             {
                 double dist = distance(centroids->at(j), image->at(i));
                 if(dist < minDist_)   
                 {
-                    minDist_  = dist;
-                    index_    = j;
+                    minDist_ = dist;
+                    index_   = j;
                 }
             }
 
@@ -183,7 +189,7 @@ kMeansRes_* kMeans(vecPixel* image, int k)
         for(int i = 0; i < k; ++i)
             cnt[i] = 1;
 
-        //统计各类别点数
+        //统计各类别点数以及centroid赋值
         for(int i = 0; i < len; ++i)
         {
             cnt[index->at(i)]++;
@@ -192,6 +198,7 @@ kMeansRes_* kMeans(vecPixel* image, int k)
             centroids->at(index->at(i))->R += image->at(i)->R;
         }
 
+        //centroid求平均值
         for(int i = 0; i < k; ++i)
         {
             centroids->at(i)->B /= cnt[i];
@@ -202,17 +209,36 @@ kMeansRes_* kMeans(vecPixel* image, int k)
         delete[] cnt;
     }
 
+    //计算K的轮廓系数Silhouette Coefficient
+    for(int i = 0; i < len; ++i)
+    {
+        double cohesion = minDistSplit->at(i);
+        double minSeparation = maxValue;
+        //由于各点到其他所有点的计算量较大，改为各点到centroid
+        for(int j = 0; j < k; ++j)
+        {
+            if(index->at(i) != j)
+            {
+                double scDist = distance(image->at(i), centroids->at(j));
+                if(scDist < minSeparation)
+                    minSeparation = scDist;
+            }
+        }
+        silhouCoeff->at(i) = (minSeparation - cohesion) / max(cohesion, minSeparation);
+    }
+
     kMeansRes_* kMeansRes   = new kMeansRes_;
     kMeansRes->centroids    = centroids;
     kMeansRes->index        = index;
-    kMeansRes->minDistSplit = minDistSplit;
+    kMeansRes->minDistSplit = Sum(minDistSplit);
+    kMeansRes->silhouCoeff  = Sum(silhouCoeff)/(silhouCoeff->size());
 
     return kMeansRes;
 }
 
 
 vecPixel* binaryKmeans(vecPixel* image, int k)
-{
+{/*{{{*/
     if(image->size() == 0 || k < 1) return NULL;
 
     const int len = image->size();
@@ -264,8 +290,8 @@ vecPixel* binaryKmeans(vecPixel* image, int k)
             kMeansRes_* kMeansRes = kMeans(imageSplit, 2);
             if(kMeansRes != NULL)
             {
-                double    sseSplit = sseSum(kMeansRes->minDistSplit);
-                double sseNotSplit = sseSum(minDistNoSplit);
+                double    sseSplit = kMeansRes->minDistSplit;
+                double sseNotSplit = Sum(minDistNoSplit);
                 if(sseSplit + sseNotSplit < minSSE)
                 {
                     bestCentToSplit = i;
@@ -290,4 +316,4 @@ vecPixel* binaryKmeans(vecPixel* image, int k)
     }
 
     return centroids;
-}
+}/*}}}*/

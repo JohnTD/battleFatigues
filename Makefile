@@ -42,10 +42,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/worldwidehua/battle-fatigues
+CMAKE_SOURCE_DIR = /home/edwardwong/battle-fatigues
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/worldwidehua/battle-fatigues
+CMAKE_BINARY_DIR = /home/edwardwong/battle-fatigues
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,9 +72,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles /home/worldwidehua/battle-fatigues/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/battle-fatigues/CMakeFiles /home/edwardwong/battle-fatigues/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/battle-fatigues/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -114,29 +114,29 @@ battle-fatigues/fast:
 	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/build
 .PHONY : battle-fatigues/fast
 
-battle-fatigues.o: battle-fatigues.cpp.o
-.PHONY : battle-fatigues.o
+main.o: main.cpp.o
+.PHONY : main.o
 
 # target to build an object file
-battle-fatigues.cpp.o:
-	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.o
-.PHONY : battle-fatigues.cpp.o
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-battle-fatigues.i: battle-fatigues.cpp.i
-.PHONY : battle-fatigues.i
+main.i: main.cpp.i
+.PHONY : main.i
 
 # target to preprocess a source file
-battle-fatigues.cpp.i:
-	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.i
-.PHONY : battle-fatigues.cpp.i
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-battle-fatigues.s: battle-fatigues.cpp.s
-.PHONY : battle-fatigues.s
+main.s: main.cpp.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-battle-fatigues.cpp.s:
-	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.s
-.PHONY : battle-fatigues.cpp.s
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -147,9 +147,9 @@ help:
 	@echo "... battle-fatigues"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... battle-fatigues.o"
-	@echo "... battle-fatigues.i"
-	@echo "... battle-fatigues.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 
