@@ -10,11 +10,12 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    vecPixel* image = new vecPixel;
-    vecPixel* centroids = new vecPixel;
     Mat img = imread(argv[1], IMREAD_COLOR);
     int nr = img.rows;
     int nc = img.cols;
+
+    vecPixel* image = new vecPixel;
+
     for(int i = 0; i < nr; ++i)
     {
         for(int j = 0; j < nc; ++j)
@@ -26,9 +27,22 @@ int main(int argc, char** argv)
             image->push_back(pixel);
         }
     }
-    centroids = binaryKmeans(image, 100);
-    for(int i = 0; i < centroids->size(); ++i)
-    {
-        cout<<centroids->at(i)->B<<" "<<centroids->at(i)->G<<" "<<centroids->at(i)->R<<endl;
-    }
+
+    kMeansRes_* kMeansRes = new kMeansRes_;
+    kMeansRes = kMeans(image, 4);
+    for(int i = 0; i < kMeansRes->centroids->size(); ++i)
+        cout<<kMeansRes->centroids->at(i)->B<<" "<<kMeansRes->centroids->at(i)->B<<" "<<kMeansRes->centroids->at(i)->B<<endl;
+
+    cout<<"-----------"<<endl;
+
+//    vecPixel* centroids = new vecPixel;
+//    centroids = binaryKmeans(image, 4);
+//
+//    if(centroids->size() != 0)
+//    {
+//        for(int i = 0; i < centroids->size(); ++i)
+//        {
+//            cout<<centroids->at(i)->B<<" "<<centroids->at(i)->G<<" "<<centroids->at(i)->R<<endl;
+//        }
+//    }
 }

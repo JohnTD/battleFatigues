@@ -83,23 +83,20 @@ inline Pixel* imageMax(vecPixel* image)
 }
 
 
-void randCent(vecPixel* image, vecPixel* centroids, int k)
+Pixel* randCent(vecPixel* image)
 {
-    if(image == NULL || centroids == NULL || k <= 0) return;
+    if(image->size() <= 0) return NULL;
 
     Pixel* minPixel = imageMin(image);
     Pixel* maxPixel = imageMax(image);
 
     srand((unsigned)time(0));
 
-    for(int i = 0; i < k; ++i)
-    {
-        Pixel* pixel = new Pixel;
-        pixel->B = minPixel->B + (maxPixel->B - minPixel->B) * (rand() / (double)(RAND_MAX));
-        pixel->G = minPixel->G + (maxPixel->G - minPixel->G) * (rand() / (double)(RAND_MAX));
-        pixel->R = minPixel->R + (maxPixel->R - minPixel->R) * (rand() / (double)(RAND_MAX));
-        centroids->push_back(pixel);
-    }
+    Pixel* pixel = new Pixel;
+    pixel->B = minPixel->B + (maxPixel->B - minPixel->B) * (rand() / (double)(RAND_MAX));
+    pixel->G = minPixel->G + (maxPixel->G - minPixel->G) * (rand() / (double)(RAND_MAX));
+    pixel->R = minPixel->R + (maxPixel->R - minPixel->R) * (rand() / (double)(RAND_MAX));
+    return pixel;
 }
 
 
@@ -122,13 +119,32 @@ inline double sseSum(vecDouble* SSE)
 
 kMeansRes_* kMeans(vecPixel* image, int k)
 {
+    if(image->size() == 0 || k < 1) return NULL;
+
     const int len       = image->size();
 
     vecPixel* centroids = new vecPixel;
     vecInt* index       = new vecInt(len, -1);
     vecDouble* minDistSplit  = new vecDouble(len, 0);
 
-    randCent(image, centroids, k);
+    centroids->push_back(randCent(image));
+
+    for(int i = 0; i < k-1; ++i)
+    {
+        Pixel* nextCent = new Pixel;
+        double maxDistToCent = minValue;
+        for(int m = 0; m < len; ++m)
+        {
+            double pixelToCent = 0;
+            for(int n = 0; n < centroids->size(); ++n)
+            {
+                pixelToCent += distance(centroids->at(n), image->at(m));
+            }
+            if(pixelToCent > maxDistToCent)
+                nextCent = image->at(i);
+        }
+        centroids->push_back(nextCent);
+    }
 
     bool clusterChanged = true;
 
@@ -157,33 +173,33 @@ kMeansRes_* kMeans(vecPixel* image, int k)
             index->at(i)   = index_;
             minDistSplit->at(i) = minDist_;
         }
+
+        int* cnt = new int[k];
+        for(int i = 0; i < k; ++i)
+            cnt[i] = 1;
+
+        for(int i = 0; i < len; ++i)
+        {
+            cnt[index->at(i)]++;
+            centroids->at(index->at(i))->B += image->at(i)->B;
+            centroids->at(index->at(i))->G += image->at(i)->G;
+            centroids->at(index->at(i))->R += image->at(i)->R;
+        }
+
+        for(int i = 0; i < k; ++i)
+        {
+            centroids->at(i)->B /= cnt[i];
+            centroids->at(i)->G /= cnt[i];
+            centroids->at(i)->R /= cnt[i];
+        }
+        
+        delete[] cnt;
     }
 
-    int* cnt = new int[k];
-    for(int i = 0; i < k; ++i)
-        cnt[i] = 0;
-
-    for(int i = 0; i < len; ++i)
-    {
-        cnt[index->at(i)]++;
-        centroids->at(index->at(i))->B += image->at(i)->B;
-        centroids->at(index->at(i))->G += image->at(i)->G;
-        centroids->at(index->at(i))->R += image->at(i)->R;
-    }
-
-    for(int i = 0; i < k; ++i)
-    {
-        centroids->at(i)->B /= cnt[i];
-        centroids->at(i)->G /= cnt[i];
-        centroids->at(i)->R /= cnt[i];
-    }
-    
-    delete[] cnt;
-
-    kMeansRes_* kMeansRes = new kMeansRes_;
-    kMeansRes->centroids  = centroids;
-    kMeansRes->index      = index;
-    kMeansRes->minDistSplit    = minDistSplit;
+    kMeansRes_* kMeansRes   = new kMeansRes_;
+    kMeansRes->centroids    = centroids;
+    kMeansRes->index        = index;
+    kMeansRes->minDistSplit = minDistSplit;
 
     return kMeansRes;
 }
@@ -191,6 +207,8 @@ kMeansRes_* kMeans(vecPixel* image, int k)
 
 vecPixel* binaryKmeans(vecPixel* image, int k)
 {
+    if(image->size() == 0 || k < 1) return NULL;
+
     const int len = image->size();
 
     vecPixel* centroids = new vecPixel;
@@ -215,8 +233,8 @@ vecPixel* binaryKmeans(vecPixel* image, int k)
     {
         double minSSE = maxValue;
         int bestCentToSplit = -1;
-        vecPixel* bestNewCent;
-        vecInt* bestClustAss;
+        vecPixel* bestNewCent = NULL;
+        vecInt* bestClustAss = NULL;
         for(int i = 0; i < centroids->size(); ++i)
         {
             vecPixel*      imageSplit = new vecPixel;
@@ -238,24 +256,31 @@ vecPixel* binaryKmeans(vecPixel* image, int k)
                 }
             }
             kMeansRes_* kMeansRes = kMeans(imageSplit, 2);
-            double       sseSplit = sseSum(kMeansRes->minDistSplit);
-            double    sseNotSplit = sseSum(minDistNoSplit);
-            if(sseSplit + sseNotSplit < minSSE)
+            if(kMeansRes != NULL)
             {
-                bestCentToSplit = i;
-                bestNewCent = kMeansRes->centroids;
-                bestClustAss = kMeansRes->index;
-                minSSE = sseSplit + sseNotSplit;
+                double    sseSplit = sseSum(kMeansRes->minDistSplit);
+                double sseNotSplit = sseSum(minDistNoSplit);
+                if(sseSplit + sseNotSplit < minSSE)
+                {
+                    bestCentToSplit = i;
+                    bestNewCent = kMeansRes->centroids;
+                    bestClustAss = kMeansRes->index;
+                    minSSE = sseSplit + sseNotSplit;
+                }
             }
         }
-        for(int i = 0; i < bestClustAss->size(); ++i)
+
+        if(bestNewCent != NULL && bestClustAss != NULL)
         {
-            if(bestClustAss->at(i) == 0)
-                index->at(bestCentToSplit) = bestCentToSplit;
-            else index->at(bestCentToSplit) = centroids->size();
+            for(int i = 0; i < bestClustAss->size(); ++i)
+            {
+                if(bestClustAss->at(i) == 0)
+                    index->at(bestCentToSplit) = bestCentToSplit;
+                else index->at(bestCentToSplit) = centroids->size();
+            }
+            centroids->at(bestCentToSplit) = bestNewCent->at(0);
+            centroids->push_back(bestNewCent->at(1));
         }
-        centroids->at(bestCentToSplit) = bestNewCent->at(0);
-        centroids->push_back(bestNewCent->at(1));
     }
 
     return centroids;
