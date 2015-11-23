@@ -25,16 +25,9 @@ class Pixel
 class kMeansRes_
 {
     public:
-        kMeansRes_(int centCnt, int pixelCnt)
-        {
-            centroids = new vecPixel[centCnt];
-            index     = new vecInt[pixelCnt];
-            minDist   = new vecDouble[pixelCnt];
-        }
-
         vecPixel* centroids;      //主色
         vecInt* index;            //归类
-        vecDouble*  minDist;      //主色距离
+        vecDouble*  minDistSplit;      //主色距离
 };
 
 
@@ -101,14 +94,16 @@ void randCent(vecPixel* image, vecPixel* centroids, int k)
 
     for(int i = 0; i < k; ++i)
     {
-        centroids->at(i)->B = minPixel->B + (maxPixel->B - minPixel->B) * (rand() / (double)(RAND_MAX));
-        centroids->at(i)->G = minPixel->G + (maxPixel->G - minPixel->G) * (rand() / (double)(RAND_MAX));
-        centroids->at(i)->R = minPixel->R + (maxPixel->R - minPixel->R) * (rand() / (double)(RAND_MAX));
+        Pixel* pixel = new Pixel;
+        pixel->B = minPixel->B + (maxPixel->B - minPixel->B) * (rand() / (double)(RAND_MAX));
+        pixel->G = minPixel->G + (maxPixel->G - minPixel->G) * (rand() / (double)(RAND_MAX));
+        pixel->R = minPixel->R + (maxPixel->R - minPixel->R) * (rand() / (double)(RAND_MAX));
+        centroids->push_back(pixel);
     }
 }
 
 
-inline double distance(Pixel* pixel, Pixel* image)
+double distance(Pixel* pixel, Pixel* image)
 {
     return sqrt(pow(pixel->B - image->B, 2) + pow(pixel->G - image->G, 2) + pow(pixel->R - image->R, 2));
 }
@@ -129,9 +124,9 @@ kMeansRes_* kMeans(vecPixel* image, int k)
 {
     const int len       = image->size();
 
-    vecPixel* centroids = new vecPixel[k];
-    vecInt* index       = new vecInt[len];
-    vecDouble* minDist  = new vecDouble[len];
+    vecPixel* centroids = new vecPixel;
+    vecInt* index       = new vecInt(len, -1);
+    vecDouble* minDistSplit  = new vecDouble(len, 0);
 
     randCent(image, centroids, k);
 
@@ -148,7 +143,7 @@ kMeansRes_* kMeans(vecPixel* image, int k)
 
             for(int j = 0; j < k; ++j)
             {
-                double dist = distance(centroids->at(i), image->at(i));
+                double dist = distance(centroids->at(j), image->at(i));
                 if(dist < minDist_)   
                 {
                     minDist_  = dist;
@@ -160,12 +155,12 @@ kMeansRes_* kMeans(vecPixel* image, int k)
                 clusterChanged = true;
 
             index->at(i)   = index_;
-            minDist->at(i) = minDist_;
+            minDistSplit->at(i) = minDist_;
         }
     }
 
-    int* cnt = new int[len];
-    for(int i = 0; i < len; ++i)
+    int* cnt = new int[k];
+    for(int i = 0; i < k; ++i)
         cnt[i] = 0;
 
     for(int i = 0; i < len; ++i)
@@ -182,13 +177,13 @@ kMeansRes_* kMeans(vecPixel* image, int k)
         centroids->at(i)->G /= cnt[i];
         centroids->at(i)->R /= cnt[i];
     }
-
+    
     delete[] cnt;
 
-    kMeansRes_* kMeansRes = new kMeansRes_(len, k);
+    kMeansRes_* kMeansRes = new kMeansRes_;
     kMeansRes->centroids  = centroids;
     kMeansRes->index      = index;
-    kMeansRes->minDist    = minDist;
+    kMeansRes->minDistSplit    = minDistSplit;
 
     return kMeansRes;
 }
@@ -200,8 +195,8 @@ vecPixel* binaryKmeans(vecPixel* image, int k)
 
     vecPixel* centroids = new vecPixel;
     Pixel*    centPixel = new Pixel;
-    vecInt*       index = new vecInt[len];
-    vecDouble*      SSE = new vecDouble[len];
+    vecInt*       index = new vecInt(len, 0);
+    vecDouble*      SSE = new vecDouble(len, 0);
 
     for(int i = 0; i < len; ++i)
     {
@@ -212,12 +207,14 @@ vecPixel* binaryKmeans(vecPixel* image, int k)
     centroids->push_back(centPixel);
 
     for(int i = 0; i < len; ++i)
+    {
         SSE->at(i) = distance(centPixel, image->at(i));
+    }
 
     while(centroids->size() < k)
     {
         double minSSE = maxValue;
-        int bestCentToSplit;
+        int bestCentToSplit = -1;
         vecPixel* bestNewCent;
         vecInt* bestClustAss;
         for(int i = 0; i < centroids->size(); ++i)
@@ -241,7 +238,7 @@ vecPixel* binaryKmeans(vecPixel* image, int k)
                 }
             }
             kMeansRes_* kMeansRes = kMeans(imageSplit, 2);
-            double       sseSplit = sseSum(kMeansRes->minDist);
+            double       sseSplit = sseSum(kMeansRes->minDistSplit);
             double    sseNotSplit = sseSum(minDistNoSplit);
             if(sseSplit + sseNotSplit < minSSE)
             {

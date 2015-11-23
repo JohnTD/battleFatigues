@@ -38,10 +38,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/edwardwong/battle-fatigues
+CMAKE_SOURCE_DIR = /home/worldwidehua/battle-fatigues
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/edwardwong/battle-fatigues
+CMAKE_BINARY_DIR = /home/worldwidehua/battle-fatigues
 
 # Include any dependencies generated for this target.
 include CMakeFiles/battle-fatigues.dir/depend.make
@@ -54,17 +54,17 @@ include CMakeFiles/battle-fatigues.dir/flags.make
 
 CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.o: CMakeFiles/battle-fatigues.dir/flags.make
 CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.o: battle-fatigues.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/edwardwong/battle-fatigues/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/worldwidehua/battle-fatigues/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.o"
-	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.o -c /home/edwardwong/battle-fatigues/battle-fatigues.cpp
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.o -c /home/worldwidehua/battle-fatigues/battle-fatigues.cpp
 
 CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.i"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/edwardwong/battle-fatigues/battle-fatigues.cpp > CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.i
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/worldwidehua/battle-fatigues/battle-fatigues.cpp > CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.i
 
 CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.s"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/edwardwong/battle-fatigues/battle-fatigues.cpp -o CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.s
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/worldwidehua/battle-fatigues/battle-fatigues.cpp -o CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.s
 
 CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.o.requires:
 .PHONY : CMakeFiles/battle-fatigues.dir/battle-fatigues.cpp.o.requires
@@ -134,6 +134,6 @@ CMakeFiles/battle-fatigues.dir/clean:
 .PHONY : CMakeFiles/battle-fatigues.dir/clean
 
 CMakeFiles/battle-fatigues.dir/depend:
-	cd /home/edwardwong/battle-fatigues && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/edwardwong/battle-fatigues /home/edwardwong/battle-fatigues /home/edwardwong/battle-fatigues /home/edwardwong/battle-fatigues /home/edwardwong/battle-fatigues/CMakeFiles/battle-fatigues.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/worldwidehua/battle-fatigues && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/worldwidehua/battle-fatigues /home/worldwidehua/battle-fatigues /home/worldwidehua/battle-fatigues /home/worldwidehua/battle-fatigues /home/worldwidehua/battle-fatigues/CMakeFiles/battle-fatigues.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/battle-fatigues.dir/depend
 
