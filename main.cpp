@@ -1,13 +1,10 @@
+#include "kMeans.h"
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
-#include <iostream>
 #include <string>
-#include <vector>
-#include "kMeans.h"
 
 using namespace cv;
-using namespace std;
 
 int main(int argc, char** argv)
 {
@@ -34,7 +31,7 @@ int main(int argc, char** argv)
     vecPixel* bestClustCent = new vecPixel;
     int bestClustIndex      = -1;
 
-    double maxSC = minValue;
+    double maxSC = minV;
 
     int begin = 2;
     int end   = 8;

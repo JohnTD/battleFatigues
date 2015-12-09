@@ -42,10 +42,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/edwardwong/battle-fatigues
+CMAKE_SOURCE_DIR = /home/worldwidehua/battle-fatigues
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/edwardwong/battle-fatigues
+CMAKE_BINARY_DIR = /home/worldwidehua/battle-fatigues
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,9 +72,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/battle-fatigues/CMakeFiles /home/edwardwong/battle-fatigues/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles /home/worldwidehua/battle-fatigues/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/battle-fatigues/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -114,6 +114,30 @@ battle-fatigues/fast:
 	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/build
 .PHONY : battle-fatigues/fast
 
+kMeans.o: kMeans.cpp.o
+.PHONY : kMeans.o
+
+# target to build an object file
+kMeans.cpp.o:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/kMeans.cpp.o
+.PHONY : kMeans.cpp.o
+
+kMeans.i: kMeans.cpp.i
+.PHONY : kMeans.i
+
+# target to preprocess a source file
+kMeans.cpp.i:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/kMeans.cpp.i
+.PHONY : kMeans.cpp.i
+
+kMeans.s: kMeans.cpp.s
+.PHONY : kMeans.s
+
+# target to generate assembly for a file
+kMeans.cpp.s:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/kMeans.cpp.s
+.PHONY : kMeans.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -147,6 +171,9 @@ help:
 	@echo "... battle-fatigues"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... kMeans.o"
+	@echo "... kMeans.i"
+	@echo "... kMeans.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

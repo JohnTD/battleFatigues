@@ -38,10 +38,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/edwardwong/battle-fatigues
+CMAKE_SOURCE_DIR = /home/worldwidehua/battle-fatigues
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/edwardwong/battle-fatigues
+CMAKE_BINARY_DIR = /home/worldwidehua/battle-fatigues
 
 # Include any dependencies generated for this target.
 include CMakeFiles/battle-fatigues.dir/depend.make
@@ -52,19 +52,42 @@ include CMakeFiles/battle-fatigues.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/battle-fatigues.dir/flags.make
 
+CMakeFiles/battle-fatigues.dir/kMeans.cpp.o: CMakeFiles/battle-fatigues.dir/flags.make
+CMakeFiles/battle-fatigues.dir/kMeans.cpp.o: kMeans.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/worldwidehua/battle-fatigues/CMakeFiles $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/battle-fatigues.dir/kMeans.cpp.o"
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/battle-fatigues.dir/kMeans.cpp.o -c /home/worldwidehua/battle-fatigues/kMeans.cpp
+
+CMakeFiles/battle-fatigues.dir/kMeans.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/battle-fatigues.dir/kMeans.cpp.i"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/worldwidehua/battle-fatigues/kMeans.cpp > CMakeFiles/battle-fatigues.dir/kMeans.cpp.i
+
+CMakeFiles/battle-fatigues.dir/kMeans.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/battle-fatigues.dir/kMeans.cpp.s"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/worldwidehua/battle-fatigues/kMeans.cpp -o CMakeFiles/battle-fatigues.dir/kMeans.cpp.s
+
+CMakeFiles/battle-fatigues.dir/kMeans.cpp.o.requires:
+.PHONY : CMakeFiles/battle-fatigues.dir/kMeans.cpp.o.requires
+
+CMakeFiles/battle-fatigues.dir/kMeans.cpp.o.provides: CMakeFiles/battle-fatigues.dir/kMeans.cpp.o.requires
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/kMeans.cpp.o.provides.build
+.PHONY : CMakeFiles/battle-fatigues.dir/kMeans.cpp.o.provides
+
+CMakeFiles/battle-fatigues.dir/kMeans.cpp.o.provides.build: CMakeFiles/battle-fatigues.dir/kMeans.cpp.o
+
 CMakeFiles/battle-fatigues.dir/main.cpp.o: CMakeFiles/battle-fatigues.dir/flags.make
 CMakeFiles/battle-fatigues.dir/main.cpp.o: main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/edwardwong/battle-fatigues/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/worldwidehua/battle-fatigues/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/battle-fatigues.dir/main.cpp.o"
-	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/battle-fatigues.dir/main.cpp.o -c /home/edwardwong/battle-fatigues/main.cpp
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/battle-fatigues.dir/main.cpp.o -c /home/worldwidehua/battle-fatigues/main.cpp
 
 CMakeFiles/battle-fatigues.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/battle-fatigues.dir/main.cpp.i"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/edwardwong/battle-fatigues/main.cpp > CMakeFiles/battle-fatigues.dir/main.cpp.i
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/worldwidehua/battle-fatigues/main.cpp > CMakeFiles/battle-fatigues.dir/main.cpp.i
 
 CMakeFiles/battle-fatigues.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/battle-fatigues.dir/main.cpp.s"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/edwardwong/battle-fatigues/main.cpp -o CMakeFiles/battle-fatigues.dir/main.cpp.s
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/worldwidehua/battle-fatigues/main.cpp -o CMakeFiles/battle-fatigues.dir/main.cpp.s
 
 CMakeFiles/battle-fatigues.dir/main.cpp.o.requires:
 .PHONY : CMakeFiles/battle-fatigues.dir/main.cpp.o.requires
@@ -77,11 +100,13 @@ CMakeFiles/battle-fatigues.dir/main.cpp.o.provides.build: CMakeFiles/battle-fati
 
 # Object files for target battle-fatigues
 battle__fatigues_OBJECTS = \
+"CMakeFiles/battle-fatigues.dir/kMeans.cpp.o" \
 "CMakeFiles/battle-fatigues.dir/main.cpp.o"
 
 # External object files for target battle-fatigues
 battle__fatigues_EXTERNAL_OBJECTS =
 
+battle-fatigues: CMakeFiles/battle-fatigues.dir/kMeans.cpp.o
 battle-fatigues: CMakeFiles/battle-fatigues.dir/main.cpp.o
 battle-fatigues: CMakeFiles/battle-fatigues.dir/build.make
 battle-fatigues: /usr/local/lib/libopencv_videostab.so.3.0.0
@@ -126,6 +151,7 @@ battle-fatigues: CMakeFiles/battle-fatigues.dir/link.txt
 CMakeFiles/battle-fatigues.dir/build: battle-fatigues
 .PHONY : CMakeFiles/battle-fatigues.dir/build
 
+CMakeFiles/battle-fatigues.dir/requires: CMakeFiles/battle-fatigues.dir/kMeans.cpp.o.requires
 CMakeFiles/battle-fatigues.dir/requires: CMakeFiles/battle-fatigues.dir/main.cpp.o.requires
 .PHONY : CMakeFiles/battle-fatigues.dir/requires
 
@@ -134,6 +160,6 @@ CMakeFiles/battle-fatigues.dir/clean:
 .PHONY : CMakeFiles/battle-fatigues.dir/clean
 
 CMakeFiles/battle-fatigues.dir/depend:
-	cd /home/edwardwong/battle-fatigues && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/edwardwong/battle-fatigues /home/edwardwong/battle-fatigues /home/edwardwong/battle-fatigues /home/edwardwong/battle-fatigues /home/edwardwong/battle-fatigues/CMakeFiles/battle-fatigues.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/worldwidehua/battle-fatigues && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/worldwidehua/battle-fatigues /home/worldwidehua/battle-fatigues /home/worldwidehua/battle-fatigues /home/worldwidehua/battle-fatigues /home/worldwidehua/battle-fatigues/CMakeFiles/battle-fatigues.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/battle-fatigues.dir/depend
 

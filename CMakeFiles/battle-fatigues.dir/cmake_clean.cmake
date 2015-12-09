@@ -1,4 +1,5 @@
 FILE(REMOVE_RECURSE
+  "CMakeFiles/battle-fatigues.dir/kMeans.cpp.o"
   "CMakeFiles/battle-fatigues.dir/main.cpp.o"
   "battle-fatigues.pdb"
   "battle-fatigues"
