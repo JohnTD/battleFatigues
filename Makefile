@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/edwardwong/battle-fatigues
+CMAKE_SOURCE_DIR = /home/worldwidehua/battleFatigues
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/edwardwong/battle-fatigues
+CMAKE_BINARY_DIR = /home/worldwidehua/battleFatigues
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,9 +69,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/battle-fatigues/CMakeFiles /home/edwardwong/battle-fatigues/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battleFatigues/CMakeFiles /home/worldwidehua/battleFatigues/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/battle-fatigues/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battleFatigues/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -99,24 +99,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named battle-fatigues
+# Target rules for targets named battleFatigues
 
 # Build rule for target.
-battle-fatigues: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 battle-fatigues
-.PHONY : battle-fatigues
+battleFatigues: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 battleFatigues
+.PHONY : battleFatigues
 
 # fast build rule for target.
-battle-fatigues/fast:
-	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/build
-.PHONY : battle-fatigues/fast
+battleFatigues/fast:
+	$(MAKE) -f CMakeFiles/battleFatigues.dir/build.make CMakeFiles/battleFatigues.dir/build
+.PHONY : battleFatigues/fast
 
 edgeDetector.o: edgeDetector.cpp.o
 .PHONY : edgeDetector.o
 
 # target to build an object file
 edgeDetector.cpp.o:
-	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/edgeDetector.cpp.o
+	$(MAKE) -f CMakeFiles/battleFatigues.dir/build.make CMakeFiles/battleFatigues.dir/edgeDetector.cpp.o
 .PHONY : edgeDetector.cpp.o
 
 edgeDetector.i: edgeDetector.cpp.i
@@ -124,7 +124,7 @@ edgeDetector.i: edgeDetector.cpp.i
 
 # target to preprocess a source file
 edgeDetector.cpp.i:
-	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/edgeDetector.cpp.i
+	$(MAKE) -f CMakeFiles/battleFatigues.dir/build.make CMakeFiles/battleFatigues.dir/edgeDetector.cpp.i
 .PHONY : edgeDetector.cpp.i
 
 edgeDetector.s: edgeDetector.cpp.s
@@ -132,7 +132,7 @@ edgeDetector.s: edgeDetector.cpp.s
 
 # target to generate assembly for a file
 edgeDetector.cpp.s:
-	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/edgeDetector.cpp.s
+	$(MAKE) -f CMakeFiles/battleFatigues.dir/build.make CMakeFiles/battleFatigues.dir/edgeDetector.cpp.s
 .PHONY : edgeDetector.cpp.s
 
 kMeans.o: kMeans.cpp.o
@@ -140,7 +140,7 @@ kMeans.o: kMeans.cpp.o
 
 # target to build an object file
 kMeans.cpp.o:
-	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/kMeans.cpp.o
+	$(MAKE) -f CMakeFiles/battleFatigues.dir/build.make CMakeFiles/battleFatigues.dir/kMeans.cpp.o
 .PHONY : kMeans.cpp.o
 
 kMeans.i: kMeans.cpp.i
@@ -148,7 +148,7 @@ kMeans.i: kMeans.cpp.i
 
 # target to preprocess a source file
 kMeans.cpp.i:
-	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/kMeans.cpp.i
+	$(MAKE) -f CMakeFiles/battleFatigues.dir/build.make CMakeFiles/battleFatigues.dir/kMeans.cpp.i
 .PHONY : kMeans.cpp.i
 
 kMeans.s: kMeans.cpp.s
@@ -156,7 +156,7 @@ kMeans.s: kMeans.cpp.s
 
 # target to generate assembly for a file
 kMeans.cpp.s:
-	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/kMeans.cpp.s
+	$(MAKE) -f CMakeFiles/battleFatigues.dir/build.make CMakeFiles/battleFatigues.dir/kMeans.cpp.s
 .PHONY : kMeans.cpp.s
 
 main.o: main.cpp.o
@@ -164,7 +164,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/battleFatigues.dir/build.make CMakeFiles/battleFatigues.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -172,7 +172,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/battleFatigues.dir/build.make CMakeFiles/battleFatigues.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -180,7 +180,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/battleFatigues.dir/build.make CMakeFiles/battleFatigues.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -189,7 +189,7 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... battle-fatigues"
+	@echo "... battleFatigues"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... edgeDetector.o"

@@ -3,7 +3,6 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
-#include <string>
 
 using namespace cv;
 
@@ -15,6 +14,9 @@ int main(int argc, char** argv)
     int height = img.rows;
     int width = img.cols;
 
+/*
+ *canny边缘检测
+ */
     double* src = new double[height*width];
     double* dst = new double[height*width];
     double* edge = new double[height*width];
@@ -28,8 +30,7 @@ int main(int argc, char** argv)
         }
     }
 
-//    Canny(src, dst, 200, 50, height, width);
-    Sobel(src, dst, edge, height, width);
+    Canny(src, dst, height, width);
 
     for(int i = 0; i < height; ++i)
     {
@@ -40,17 +41,15 @@ int main(int argc, char** argv)
         }
     }
 
-    namedWindow("canny", WINDOW_AUTOSIZE);
-    imshow("canny", img);
-    waitKey(0);
-
-    /*
+/*
+ *k-means++聚类寻找图像主色
+ */
     vecPixel* image = new vecPixel;
 
-    for(int i = 0; i < nr; ++i)
+    for(int i = 0; i < height; ++i)
     {
         double* u = img.ptr<double>(i);
-        for(int j = 0; j < nc; ++j)
+        for(int j = 0; j < width; ++j)
         {
             Pixel* pixel = new Pixel;
             pixel->B = *u++;
@@ -86,17 +85,4 @@ int main(int argc, char** argv)
         }
     }
     bestClustCent = kMeans(image, bestClustIndex)->centroids;
-
-    for(int i = 0; i < bestClustCent->size(); ++i)
-    {
-        string s;
-        char t[256];
-        sprintf(t, "%d", i);
-        s = t;
-        Mat test(500, 500, CV_8UC3, Scalar((int)bestClustCent->at(i)->B, (int)bestClustCent->at(i)->G, (int)bestClustCent->at(i)->R));
-        namedWindow(s, WINDOW_AUTOSIZE);
-        imshow(s, test);
-    }
-    waitKey(0);
-    */
 }

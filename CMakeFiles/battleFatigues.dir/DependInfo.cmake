@@ -4,9 +4,9 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/edwardwong/battle-fatigues/edgeDetector.cpp" "/home/edwardwong/battle-fatigues/CMakeFiles/battle-fatigues.dir/edgeDetector.cpp.o"
-  "/home/edwardwong/battle-fatigues/kMeans.cpp" "/home/edwardwong/battle-fatigues/CMakeFiles/battle-fatigues.dir/kMeans.cpp.o"
-  "/home/edwardwong/battle-fatigues/main.cpp" "/home/edwardwong/battle-fatigues/CMakeFiles/battle-fatigues.dir/main.cpp.o"
+  "/home/worldwidehua/battleFatigues/edgeDetector.cpp" "/home/worldwidehua/battleFatigues/CMakeFiles/battleFatigues.dir/edgeDetector.cpp.o"
+  "/home/worldwidehua/battleFatigues/kMeans.cpp" "/home/worldwidehua/battleFatigues/CMakeFiles/battleFatigues.dir/kMeans.cpp.o"
+  "/home/worldwidehua/battleFatigues/main.cpp" "/home/worldwidehua/battleFatigues/CMakeFiles/battleFatigues.dir/main.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
