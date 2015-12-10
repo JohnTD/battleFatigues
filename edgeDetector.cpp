@@ -7,13 +7,10 @@ void matrixRotate(double* src, double* dst, int height, int width)
 
     double* temp = new double[height*width];
 
-    //for(int i = 0; i < height; ++i)
-    //{
-        //for(int j = 0; j < width; ++j)
-            //temp[i*width + j] = src[(height-i)*width + (width-j)];
-    //}
-    for(int i=0;i<width*height;i++){
-        temp[width*height-1-i]=src[i];
+    for(int i = 0; i < height; ++i)
+    {
+        for(int j = 0; j < width; ++j)
+            temp[(height-1-i)*width + width-1-j] = src[i*width+j];
     }
 
     for(int i = 0; i < height*width; ++i)
