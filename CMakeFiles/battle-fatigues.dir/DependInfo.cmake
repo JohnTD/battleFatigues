@@ -4,8 +4,9 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/worldwidehua/battle-fatigues/kMeans.cpp" "/home/worldwidehua/battle-fatigues/CMakeFiles/battle-fatigues.dir/kMeans.cpp.o"
-  "/home/worldwidehua/battle-fatigues/main.cpp" "/home/worldwidehua/battle-fatigues/CMakeFiles/battle-fatigues.dir/main.cpp.o"
+  "/home/edwardwong/battle-fatigues/edgeDetector.cpp" "/home/edwardwong/battle-fatigues/CMakeFiles/battle-fatigues.dir/edgeDetector.cpp.o"
+  "/home/edwardwong/battle-fatigues/kMeans.cpp" "/home/edwardwong/battle-fatigues/CMakeFiles/battle-fatigues.dir/kMeans.cpp.o"
+  "/home/edwardwong/battle-fatigues/main.cpp" "/home/edwardwong/battle-fatigues/CMakeFiles/battle-fatigues.dir/main.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,7 +16,6 @@ SET(CMAKE_TARGET_LINKED_INFO_FILES
 
 # The include file search paths:
 SET(CMAKE_C_TARGET_INCLUDE_PATH
-  "/include,"
   "/usr/local/include/opencv"
   "/usr/local/include"
   )

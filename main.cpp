@@ -1,4 +1,5 @@
 #include "kMeans.h"
+#include "edgeDetector.h"
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
@@ -8,20 +9,53 @@ using namespace cv;
 
 int main(int argc, char** argv)
 {
-    Mat img = imread(argv[1], IMREAD_COLOR);
-    int nr = img.rows;
-    int nc = img.cols;
+    Mat img = imread(argv[1], 0);
+    img.convertTo(img, CV_64FC1, 1.0/255.0);
 
+    int height = img.rows;
+    int width = img.cols;
+
+    double* src = new double[height*width];
+    double* dst = new double[height*width];
+    double* edge = new double[height*width];
+
+    for(int i = 0; i < height; ++i)
+    {
+        double* u = img.ptr<double>(i);
+        for(int j = 0; j < width; ++j)
+        {
+            src[i*width+j] = *u++;
+        }
+    }
+
+//    Canny(src, dst, 200, 50, height, width);
+    Sobel(src, dst, edge, height, width);
+
+    for(int i = 0; i < height; ++i)
+    {
+        double* u = img.ptr<double>(i);
+        for(int j = 0; j < width; ++j)
+        {
+            *u++ = dst[i*width+j];
+        }
+    }
+
+    namedWindow("canny", WINDOW_AUTOSIZE);
+    imshow("canny", img);
+    waitKey(0);
+
+    /*
     vecPixel* image = new vecPixel;
 
     for(int i = 0; i < nr; ++i)
     {
+        double* u = img.ptr<double>(i);
         for(int j = 0; j < nc; ++j)
         {
             Pixel* pixel = new Pixel;
-            pixel->B = (double)img.at<Vec3b>(i, j)[0];
-            pixel->G = (double)img.at<Vec3b>(i, j)[1];
-            pixel->R = (double)img.at<Vec3b>(i, j)[2];
+            pixel->B = *u++;
+            pixel->G = *u++;
+            pixel->R = *u++;
             image->push_back(pixel);
         }
     }
@@ -64,4 +98,5 @@ int main(int argc, char** argv)
         imshow(s, test);
     }
     waitKey(0);
+    */
 }

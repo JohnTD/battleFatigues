@@ -16,9 +16,6 @@ SUFFIXES =
 
 .SUFFIXES: .hpux_make_needs_suffix_list
 
-# Produce verbose output by default.
-VERBOSE = 1
-
 # Suppress display of executed commands.
 $(VERBOSE).SILENT:
 
@@ -42,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/worldwidehua/battle-fatigues
+CMAKE_SOURCE_DIR = /home/edwardwong/battle-fatigues
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/worldwidehua/battle-fatigues
+CMAKE_BINARY_DIR = /home/edwardwong/battle-fatigues
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,9 +69,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles /home/worldwidehua/battle-fatigues/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/battle-fatigues/CMakeFiles /home/edwardwong/battle-fatigues/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/battle-fatigues/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -113,6 +110,30 @@ battle-fatigues: cmake_check_build_system
 battle-fatigues/fast:
 	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/build
 .PHONY : battle-fatigues/fast
+
+edgeDetector.o: edgeDetector.cpp.o
+.PHONY : edgeDetector.o
+
+# target to build an object file
+edgeDetector.cpp.o:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/edgeDetector.cpp.o
+.PHONY : edgeDetector.cpp.o
+
+edgeDetector.i: edgeDetector.cpp.i
+.PHONY : edgeDetector.i
+
+# target to preprocess a source file
+edgeDetector.cpp.i:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/edgeDetector.cpp.i
+.PHONY : edgeDetector.cpp.i
+
+edgeDetector.s: edgeDetector.cpp.s
+.PHONY : edgeDetector.s
+
+# target to generate assembly for a file
+edgeDetector.cpp.s:
+	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/edgeDetector.cpp.s
+.PHONY : edgeDetector.cpp.s
 
 kMeans.o: kMeans.cpp.o
 .PHONY : kMeans.o
@@ -171,6 +192,9 @@ help:
 	@echo "... battle-fatigues"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... edgeDetector.o"
+	@echo "... edgeDetector.i"
+	@echo "... edgeDetector.s"
 	@echo "... kMeans.o"
 	@echo "... kMeans.i"
 	@echo "... kMeans.s"

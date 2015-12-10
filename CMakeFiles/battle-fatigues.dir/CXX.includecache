@@ -6,11 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/home/worldwidehua/battle-fatigues/kMeans.cpp
-kMeans.h
-/home/worldwidehua/battle-fatigues/kMeans.h
+/home/edwardwong/battle-fatigues/edgeDetector.cpp
+edgeDetector.h
+/home/edwardwong/battle-fatigues/edgeDetector.h
 
-/home/worldwidehua/battle-fatigues/kMeans.h
+/home/edwardwong/battle-fatigues/edgeDetector.h
+iostream
+-
+math.h
+-
+stdlib.h
+-
+assert.h
+-
+
+/home/edwardwong/battle-fatigues/kMeans.h
 iostream
 -
 vector
@@ -22,9 +32,11 @@ math.h
 time.h
 -
 
-/home/worldwidehua/battle-fatigues/main.cpp
+/home/edwardwong/battle-fatigues/main.cpp
 kMeans.h
-/home/worldwidehua/battle-fatigues/kMeans.h
+/home/edwardwong/battle-fatigues/kMeans.h
+edgeDetector.h
+/home/edwardwong/battle-fatigues/edgeDetector.h
 opencv2/core.hpp
 -
 opencv2/highgui.hpp

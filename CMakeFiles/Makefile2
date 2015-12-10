@@ -24,9 +24,6 @@ SUFFIXES =
 
 .SUFFIXES: .hpux_make_needs_suffix_list
 
-# Produce verbose output by default.
-VERBOSE = 1
-
 # Suppress display of executed commands.
 $(VERBOSE).SILENT:
 
@@ -50,10 +47,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/worldwidehua/battle-fatigues
+CMAKE_SOURCE_DIR = /home/edwardwong/battle-fatigues
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/worldwidehua/battle-fatigues
+CMAKE_BINARY_DIR = /home/edwardwong/battle-fatigues
 
 #=============================================================================
 # Target rules for target CMakeFiles/battle-fatigues.dir
@@ -62,7 +59,7 @@ CMAKE_BINARY_DIR = /home/worldwidehua/battle-fatigues
 CMakeFiles/battle-fatigues.dir/all:
 	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/depend
 	$(MAKE) -f CMakeFiles/battle-fatigues.dir/build.make CMakeFiles/battle-fatigues.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/worldwidehua/battle-fatigues/CMakeFiles  1 2
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/edwardwong/battle-fatigues/CMakeFiles  1 2 3
 	@echo "Built target battle-fatigues"
 .PHONY : CMakeFiles/battle-fatigues.dir/all
 
@@ -72,9 +69,9 @@ all: CMakeFiles/battle-fatigues.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/battle-fatigues.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/battle-fatigues/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/battle-fatigues.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/worldwidehua/battle-fatigues/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/edwardwong/battle-fatigues/CMakeFiles 0
 .PHONY : CMakeFiles/battle-fatigues.dir/rule
 
 # Convenience name for target.
