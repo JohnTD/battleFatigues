@@ -41,14 +41,10 @@ int main(int argc, char** argv)
         }
     }
 
-    namedWindow("test", WINDOW_AUTOSIZE);
-    imshow("test", img);
-    waitKey(0);
 
 /*
  *k-means++聚类寻找图像主色
  */
-/*
     vecPixel* image = new vecPixel;
 
     for(int i = 0; i < height; ++i)
@@ -90,5 +86,4 @@ int main(int argc, char** argv)
         }
     }
     bestClustCent = kMeans(image, bestClustIndex)->centroids;
-*/
 }
