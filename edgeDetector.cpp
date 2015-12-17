@@ -43,9 +43,6 @@ void Relevant(double* src, double* dst, double* mask, int height, int width, int
 
     double* temp = new double[height*width];
     
-    int mask_x = mask_height/2;
-    int mask_y = mask_width/2;
-
     for(int i = 0; i < height; ++i)
     {
         for(int j = 0; j < width; ++j)
@@ -55,8 +52,8 @@ void Relevant(double* src, double* dst, double* mask, int height, int width, int
             {
                 for(int n = 0; n < mask_width; ++n)
                 {
-                    if((i+m-mask_x) >= 0 && (i+m-mask_x) < height && (j+n-mask_y) >= 0 && (j+n-mask_y) < width)
-                        value += src[((i+m-mask_x)*width + j+n-mask_y)]*mask[m*mask_width + n];
+                    if((i-mask_height+1 + m) >= 0 && (i-mask_height+1 + m) < height && (j-mask_width+1 + n) >= 0 && (j-mask_width+1 + n) < width)
+                        value += src[((i-mask_height+1 + m)*width + j-mask_width+1 + n)]*mask[m*mask_width + n];
                 }
             }
             temp[i*width+j] = value;

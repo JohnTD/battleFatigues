@@ -1,5 +1,18 @@
+## git忽略文件
+
+
+## 编译文件
 CMakeFiles/
-*.cmake
 CMakeCache.txt
 Makefile
+*.cmake
+
+
+## 执行文件
 battleFatigues
+
+
+## 图片
+*.jpg
+*.png
+*.tiff
